@@ -143,9 +143,14 @@ int initializeBST(Node** h) {
 
 void recursiveInorder(Node* ptr)
 {
-	if(ptr) {
+	if (ptr==NULL){
+		printf("tree is empty!!!");
+		return;
+	}
+
+	if(ptr!=NULL) {
 		recursiveInorder(ptr->left);
-		printf(" [%d] ", ptr->key);
+		printf(" [ %d ] ", ptr->key);
 		recursiveInorder(ptr->right);
 	}
 }
@@ -166,7 +171,7 @@ void iterativeInorder(Node* node)
 			node=pop();
 			if(!node)
 				break;
-			printf("%3d", node->key);
+			printf(" [ %d ] ", node->key);
 			node=node->right;
 		}
 }
@@ -176,17 +181,13 @@ void iterativeInorder(Node* node)
  */
 void levelOrder(Node* ptr)
 {
-	int front=0;
-	int rear=0;
-	Node* queue[MAX_QUEUE_SIZE];
-
 	if(!ptr) //공백트리
 		return;
 	enQueue(ptr);
 	for(;;){
 		ptr=deQueue();
 		if(ptr){
-			printf("%d", ptr->key);
+			printf(" [ %d ] ", ptr->key);
 			if(ptr->left)
 				enQueue(ptr->left);
 			if(ptr->right)
