@@ -48,7 +48,7 @@ int deleteNode(Node* head, int key);  /* delete the node for the key */
 int freeBST(Node* head); /* free all memories allocated to the tree */
 
 /* you may add your own defined functions if necessary */
-
+void isEmpty(Node* ptr);
 
 /*void printStack();*/
 
@@ -96,13 +96,16 @@ int main()
 			break;
 
 		case 'r': case 'R':
+			isEmpty(head->left);
 			recursiveInorder(head->left);
 			break;
 		case 't': case 'T':
+			isEmpty(head->left);
 			iterativeInorder(head->left);
 			break;
 
 		case 'l': case 'L':
+			isEmpty(head->left);
 			levelOrder(head->left);
 			break;
 
@@ -139,14 +142,15 @@ int initializeBST(Node** h) {
 	return 1;
 }
 
-
+void isEmpty(Node* ptr){ //빈 트리인지 구분(순회시 사용)
+	if(ptr==NULL){
+		printf("tree is empty!\n");
+		return ;
+	}
+}
 
 void recursiveInorder(Node* ptr)
 {
-	if (ptr==NULL){
-		printf("tree is empty!!!");
-		return;
-	}
 
 	if(ptr!=NULL) {
 		recursiveInorder(ptr->left);
@@ -160,10 +164,6 @@ void recursiveInorder(Node* ptr)
  */
 void iterativeInorder(Node* node)
 {
-	if (node==NULL){
-				printf("tree is empty!!!");
-				return;
-			}
 		while(1){
 			for(; node; node=node->left){
 				push(node);
@@ -181,10 +181,8 @@ void iterativeInorder(Node* node)
  */
 void levelOrder(Node* ptr)
 {
-	if(!ptr) //공백트리
-		return;
 	enQueue(ptr);
-	for(;;){
+	while(1){
 		ptr=deQueue();
 		if(ptr){
 			printf(" [ %d ] ", ptr->key);
@@ -245,6 +243,11 @@ int insert(Node* head, int key)
 
 int deleteNode(Node* head, int key)
 {
+	if(head->left==NULL){ //빈 트리일 경우
+				printf("tree is empty!\n");
+				return 0;
+			}
+
 	Node *parent, *p, *t, *tparent;
 	Node *child;
 
@@ -371,9 +374,12 @@ Node* deQueue()
 
 void enQueue(Node* aNode)
 {
-	if(rear!= MAX_QUEUE_SIZE-1&&aNode != NULL)
-	queue[++rear]=aNode;
+	if((rear!= MAX_QUEUE_SIZE-1)&&(aNode != NULL)){
+		queue[++rear]=aNode;
+	}
 }
+
+
 
 
 
