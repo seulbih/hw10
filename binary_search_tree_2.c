@@ -199,17 +199,17 @@ void levelOrder(Node* ptr)
 int insert(Node* head, int key)
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
-	newNode->key = key;
+	newNode->key = key; //삽입노드 초기설정
 	newNode->left = NULL;
 	newNode->right = NULL;
 
-	if (head->left == NULL) {
-		head->left = newNode;
+	if (head->left == NULL) { //루트노드가 없는 경우
+		head->left = newNode; //루트에 노드 삽입
 		return 1;
 	}
 
 	/* head->left is the root */
-	Node* ptr = head->left;
+	Node* ptr = head->left; //루트노드 있는 경우
 
 	Node* parentNode = NULL;
 	while(ptr != NULL) {
@@ -321,7 +321,7 @@ int deleteNode(Node* head, int key)
 
 void freeNode(Node* ptr)
 {
-	if(ptr) {
+	if(ptr) { //recursive방식으로 노드 메모리 해제
 		freeNode(ptr->left);
 		freeNode(ptr->right);
 		free(ptr);
@@ -331,9 +331,9 @@ void freeNode(Node* ptr)
 int freeBST(Node* head)
 {
 
-	if(head->left == head)
+	if(head->left == head)//루트노드가 없는 경우
 	{
-		free(head);
+		free(head); //헤드메모리만 해제
 		return 1;
 	}
 
@@ -350,15 +350,15 @@ int freeBST(Node* head)
 Node* pop()
 {
 	Node* p=NULL;
-		if(top>=0)
-			p=stack[top--];
+		if(top>=0) //스택에 데이터가 있는 경우
+			p=stack[top--]; //top에 있는 데이터 p로 반환하고 top-1
 		return p;
 }
 
 void push(Node* aNode)
 {
-	if(top<MAX_STACK_SIZE-1&& aNode !=NULL)
-		stack[++top] = aNode;
+	if(top<MAX_STACK_SIZE-1&& aNode !=NULL) //스택에 공간이 있는 경우, 트리가 존재하는 경우
+		stack[++top] = aNode; //top+1 후  스택에 데이터 삽입
 }
 
 
@@ -366,15 +366,15 @@ void push(Node* aNode)
 Node* deQueue()
 {
 	Node *p=NULL;
-	if(front!=rear)
-		p=queue[++front];
+	if(front!=rear) //큐에 데이터가 있는 경우
+		p=queue[++front]; //FIFO방식으로 p로 데이터 반환
 	return p;
 }
 
 void enQueue(Node* aNode)
 {
-	if((rear!= MAX_QUEUE_SIZE-1)&&(aNode != NULL)){
-		queue[++rear]=aNode;
+	if((rear!= MAX_QUEUE_SIZE-1)&&(aNode != NULL)){ //큐에 공간이 있고 트리가 존재하는 경우
+		queue[++rear]=aNode; // rear움직이며 데이터 삽입
 	}
 }
 
