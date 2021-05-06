@@ -50,8 +50,7 @@ int freeBST(Node* head); /* free all memories allocated to the tree */
 /* you may add your own defined functions if necessary */
 void isEmpty(Node* ptr);
 
-void printStack();
-
+/*void printStack();*/
 
 
 int main()
@@ -110,7 +109,7 @@ int main()
 			break;
 
 		case 'p': case 'P':
-			printStack();
+			/*printStack();*/
 			break;
 
 		default:
@@ -140,12 +139,6 @@ int initializeBST(Node** h) {
 	front = rear = -1;
 
 	return 1;
-}
-void printStack(){
-	int i;
-	for(i=0;i<=top;i++){
-		printf(" [ %d ]", stack[i]);
-	}
 }
 
 void isEmpty(Node* ptr){ //빈 트리인지 구분(순회시 사용)
